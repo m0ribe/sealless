@@ -1,0 +1,26 @@
+.Wrapper
+  .Header
+    .Header__Box
+      .Header__Box__Name
+        namae
+      = icon('far', 'edit', class: ".Header__Box__icon")
+  .Body
+    .Switch
+      .Switch__Request
+        Request
+      .Switch__Approve
+        Approve
+    = link_to "", class: "New-request" do
+      New request
+    .Request
+      .Request__Unapproved
+        .Request__Unapproved__Title
+          未承認
+        %table{:border => 1, :width => "100%"} 
+          %tr 
+          %th{:width => "200"} Name 
+          %th.edit Edit 
+      .Request__Approved
+        .Request__Approved__Title
+          承認済
+  .Footer
