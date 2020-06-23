@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_052043) do
+ActiveRecord::Schema.define(version: 2020_06_22_103605) do
+
+  create_table "passes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "first_user_id"
+    t.integer "first_approval"
+    t.bigint "second_user_id"
+    t.integer "second_approval"
+    t.bigint "third_user_id"
+    t.integer "third_approval"
+    t.bigint "final_user_id"
+    t.integer "final_approval"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["final_user_id"], name: "index_passes_on_final_user_id"
+    t.index ["first_user_id"], name: "index_passes_on_first_user_id"
+    t.index ["second_user_id"], name: "index_passes_on_second_user_id"
+    t.index ["third_user_id"], name: "index_passes_on_third_user_id"
+  end
+
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "pdf"
+    t.string "message", null: false
+    t.bigint "user_id"
+    t.bigint "pass_id"
+    t.integer "type", null: false
+    t.bigint "admission_id"
+    t.datetime "deadline", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -26,4 +57,8 @@ ActiveRecord::Schema.define(version: 2020_06_22_052043) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "passes", "users", column: "final_user_id"
+  add_foreign_key "passes", "users", column: "first_user_id"
+  add_foreign_key "passes", "users", column: "second_user_id"
+  add_foreign_key "passes", "users", column: "third_user_id"
 end
