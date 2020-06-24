@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_103605) do
+ActiveRecord::Schema.define(version: 2020_06_23_053419) do
+
+  create_table "admissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "pass_id"
+    t.string "title", null: false
+    t.datetime "start", null: false
+    t.datetime "finish", null: false
+    t.string "detail", null: false
+    t.string "prace", null: false
+    t.string "campany", null: false
+    t.string "representative", null: false
+    t.string "tell", null: false
+    t.string "worker1", null: false
+    t.string "worker2", null: false
+    t.string "worker3", null: false
+    t.string "worker4", null: false
+    t.boolean "Aerial"
+    t.boolean "Firearm"
+    t.string "Notice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pass_id"], name: "index_admissions_on_pass_id"
+    t.index ["user_id"], name: "index_admissions_on_user_id"
+  end
 
   create_table "passes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "first_user_id"
@@ -57,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_06_22_103605) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admissions", "users"
   add_foreign_key "passes", "users", column: "final_user_id"
   add_foreign_key "passes", "users", column: "first_user_id"
   add_foreign_key "passes", "users", column: "second_user_id"
