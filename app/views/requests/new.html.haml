@@ -1,0 +1,48 @@
+.Base
+  .Base__Textbox
+    = form_with model: [@requests], local: true do |form|
+      .Base__Textbox__Subtitle
+        基本情報
+      = form.text_field :title, placeholder: "タイトル", class: "Base__Textbox__Text-field"
+      = form.text_area :message, placeholder: "内容", class: "Base__Textbox__Text-area"
+      .Base__Textbox__Deadline
+        希望納期:
+        = form.datetime_select :deadline, {}, class: "Base__Textbox__Deadline__Pulldown"
+      = form.submit value: "SEND", class: "Base__Textbox__Send"
+.Type
+  .Type__Admission
+    入場許可
+  .Type__Approval
+    書類承認
+= form_with model: [@requests], local: true do |form|
+  .Form__Adomission
+    .Form__Adomission__Child
+      .Form__Adomission__Child__Subtitle
+        作業情報
+      = form.text_field :title, placeholder: "作業名", class: "Form__Adomission__Child__Text-field"
+      .Form__Adomission__Child__Datetime-Start
+        作業開始日時:
+        = form.datetime_select :start, {}, class: "Form__Adomission__Child__Datetime-Start__Pulldown"
+      .Form__Adomission__Child__Datetime-Finish
+        作業終了日時:
+        = form.datetime_select :finish, {}, class: 'Form__Adomission__Child__Datetime-Finish__Pulldown'
+      = form.text_area :detail, placeholder: "作業内容", class: "Form__Adomission__Child__Text-area"
+      = form.text_field :prace, placeholder: "場所", class: "Form__Adomission__Child__Text-field"
+      .Form__Adomission__Child__Check-box
+        高所作業：
+        = form.check_box :Aerial, class: "Form__Adomission__Child__Check-box__Aerial"
+      .Form__Adomission__Child__Check-box
+        火器使用：
+        = form.check_box :Firearm, class: "Form__Adomission__Child__Check-box__Firearm"    
+    .Form__Adomission__Child
+      .Form__Adomission__Child__Subtitle
+        作業者情報
+      = form.text_field :campany, placeholder: "会社名", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :representative, placeholder: "代表者名", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :tell, placeholder: "000-0000-0000", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :worker1, placeholder: "作業者1", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :worker2, placeholder: "作業者2", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :worker3, placeholder: "作業者3", class: "Form__Adomission__Child__Text-field"
+      = form.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
+      = form.text_area :Notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
+  = form.submit value: "SEND", class: "Form__Send"

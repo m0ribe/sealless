@@ -1,0 +1,89 @@
+.Base{
+  &__Textbox{
+    margin: 10px 30px 0 30px;
+    width: calc( 100% - 60px );
+    &__Subtitle{
+      margin: 10px 0 0 0;
+      font-size: 30px;
+    }
+    &__Text-field{
+      margin: 5px 0 0 0;
+        display: block;
+    }
+    &__Text-area{
+      margin: 5px 0 0 0;
+        display: block;
+        height: 60px;
+        width: 100%;
+    }
+    &__Deadline{
+      margin: 5px 0 0 0;
+      &__Pulldown{
+        font-size: 17px;
+        height: 24px;
+      }
+    }
+    &__Send{
+      margin: 5px auto;
+      display: block;
+    }
+  }
+}
+
+
+.Type{
+  height: 28px;
+  display: flex;
+  text-align: center;
+  line-height: 28px;
+  &__Admission{
+    width: 50%;
+    border: 1px solid black;
+  }
+  &__Approval{
+    width: 50%;
+    border: 1px solid black;
+  }
+}
+
+.Form__Adomission{
+  margin: 0 30px;
+  background-color: lightness($color: #111111);
+  display: flex;
+  justify-content: space-between;
+  &__Child{
+    width: 45%;
+    &__Subtitle{
+      margin: 10px 0 0 0;
+      font-size: 30px;
+      }
+      &__Text-field{
+        margin: 5px 0 0 0;
+        display: block;
+      }
+      &__Text-area{
+        margin: 5px 0 0 0;
+        display: block;
+        height: 60px;
+        width: 100%;
+      }
+    &__Datetime-Start{
+      margin: 5px 0 0 0;
+      &__Pulldown{
+        font-size: 17px;
+        height: 24px;
+      }
+    }
+    &__Datetime-Finish{
+      margin: 5px 0 0 0;
+      &__Pulldown{
+        font-size: 17px;
+        height: 24px;
+      }
+    }
+  }
+}
+.Form__Send{
+  display: block;
+  margin: 5px auto;
+}

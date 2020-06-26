@@ -1,31 +1,20 @@
-.Wrapper
-  .Header
-    .Header__logo
-      Sealless
-    .Header__Box
-      .Header__Box__Name
-        = current_user.name
-      = link_to edit_user_path(current_user) do
-        = icon('fa', 'cog', class: "Header__Box__icon")
-      = link_to destroy_user_session_path, method: :delete do
-        = icon('fa', 'door-open', class: "Header__Box__icon")
-  .Body
-    .Switch
-      .Switch__Request
-        Request
-      .Switch__Approve
-        Approve
-    = link_to "", class: "New-request" do
-      New request
-    .Request
-      .Request__Unapproved
-        .Request__Unapproved__Title
-          未承認
-        %table{:border => 1, :width => "100%"} 
-          %tr 
-          %th{:width => "200"} Name 
-          %th.edit Edit 
-      .Request__Approved
-        .Request__Approved__Title
-          承認済
-  .Footer
+
+.Body
+  .Switch
+    .Switch__Request
+      Request
+    .Switch__Approve
+      Approve
+  = link_to "New request", new_request_path, class: "New-request"
+  .Request
+    .Request__Unapproved
+      .Request__Unapproved__Title
+        未承認
+      %table{:border => 1, :width => "100%"} 
+        %tr 
+        %th{:width => "200"} Name 
+        %th.edit Edit 
+    .Request__Approved
+      .Request__Approved__Title
+        承認済
+.Footer
