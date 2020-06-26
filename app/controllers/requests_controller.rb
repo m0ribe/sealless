@@ -5,14 +5,23 @@ class RequestsController < ApplicationController
   end
 
   def new
-    @request = Request.new
+    @requests = Request.new
   end
 
   def create
-    @request = Request.new
-    redirect_to requests_path
+    if Request.create(request_params)
+      redirect_to requests_path
+    end
+  end
+
+
+  private
+  def request_params
+    params.require(:request).permit!.merge(user_id: current_user.id)
   end
 
   def set_admission
     @admission = Admission.new
+  end
+
 end

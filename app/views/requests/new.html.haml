@@ -1,13 +1,20 @@
 .Base
-  .Base__Subtitle
-    基本情報
-
+  .Base__Textbox
+    = form_with model: [@requests], local: true do |form|
+      .Base__Textbox__Subtitle
+        基本情報
+      = form.text_field :title, placeholder: "タイトル", class: "Base__Textbox__Text-field"
+      = form.text_area :message, placeholder: "内容", class: "Base__Textbox__Text-area"
+      .Base__Textbox__Deadline
+        希望納期:
+        = form.datetime_select :deadline, {}, class: "Base__Textbox__Deadline__Pulldown"
+      = form.submit value: "SEND", class: "Base__Textbox__Send"
 .Type
   .Type__Admission
     入場許可
   .Type__Approval
     書類承認
-= form_with model: @request, local: true do |form|
+= form_with model: [@requests], local: true do |form|
   .Form__Adomission
     .Form__Adomission__Child
       .Form__Adomission__Child__Subtitle

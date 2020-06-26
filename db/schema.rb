@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_053419) do
 
   create_table "admissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "pass_id"
     t.string "title", null: false
     t.datetime "start", null: false
     t.datetime "finish", null: false
@@ -32,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_06_23_053419) do
     t.string "Notice"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["pass_id"], name: "index_admissions_on_pass_id"
     t.index ["user_id"], name: "index_admissions_on_user_id"
   end
 
@@ -58,11 +56,9 @@ ActiveRecord::Schema.define(version: 2020_06_23_053419) do
     t.string "pdf"
     t.string "message", null: false
     t.bigint "user_id"
-    t.bigint "pass_id"
-    t.integer "type", null: false
-    t.bigint "admission_id"
+    t.integer "kind", default: 1, null: false
     t.datetime "deadline", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
