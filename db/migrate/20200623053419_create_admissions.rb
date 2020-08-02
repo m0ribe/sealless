@@ -1,7 +1,7 @@
 class CreateAdmissions < ActiveRecord::Migration[6.0]
   def change
     create_table :admissions do |t|
-      t.references :user, foreign_key: true
+      t.references :request, foreign_key: true
       t.string :title, null: false
       t.datetime :start, null: false
       t.datetime :finish, null: false
@@ -14,9 +14,9 @@ class CreateAdmissions < ActiveRecord::Migration[6.0]
       t.string :worker2, null: false
       t.string :worker3, null: false
       t.string :worker4, null: false
-      t.boolean :Aerial
-      t.boolean :Firearm
-      t.string :Notice
+      t.boolean :aerial
+      t.boolean :firearm
+      t.string :notice
       t.timestamps
     end
   end
