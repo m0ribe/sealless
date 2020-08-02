@@ -1,7 +1,8 @@
 .Base{
+  display: flex;
   &__Textbox{
+    width: 70%;
     margin: 10px 30px 0 30px;
-    width: calc( 100% - 60px );
     &__Subtitle{
       margin: 10px 0 0 0;
       font-size: 30px;
@@ -28,10 +29,19 @@
       display: block;
     }
   }
+  &__Pass{
+    width: 30%;
+    margin: 10px 30px 0 30px;
+    &__Subtitle{
+    margin: 10px 0 0 0;
+    font-size: 30px;
+   }
+  }
 }
 
 
 .Type{
+  margin: 20px 0 0 0;
   height: 28px;
   display: flex;
   text-align: center;
