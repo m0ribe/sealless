@@ -1,28 +1,39 @@
+= javascript_include_tag 'index'
 = render "header"
 .Body
   .Switch
-    .Switch__Request
+    %button{ class: "Switch__Request Active", id: "Request" }
       Request
-    .Switch__Approve
+    %button{ class: "Switch__Approve", id: "Approve" }
       Approve
   = link_to "New request", new_request_path, class: "New-request"
   .Request
     .Request__Unapproved
       .Request__Unapproved__Title
-        未承認
+        承認依頼中
         %table{border: 1, width: "100%"} 
           .Request__Unapproved__Title__column
             %tr 
               %th{width: "200"} 
-                Name
+                Title
               %th
-                Edit 
-          - @unapproved.each do |f|
+                Detail 
+              %th
+                edit
+              %th
+                delete
+          - @request_unapproved.each do |f|
             %tr 
               %th
                 = f.title
               %th
                 = f.title
+              %th
+                = link_to edit_request_path(f.id) do
+                  = icon('fa', 'cog', class: "Header__Box__icon")
+              %th
+                = link_to request_path(f.id), method: :delete do
+                  = icon('fa', 'door-open', class: "Header__Box__icon")
     .Request__Approved
       .Request__Approved__Title
         承認済
@@ -30,10 +41,47 @@
           .Request__Unapproved__Title__column
             %tr 
               %th{width: "200"} 
-                Name
+                Title
               %th
-                Edit 
-          - @approved.each do |f|
+                Detail 
+          - @request_approved.each do |f|
+            %tr 
+              %th
+                = f.title
+              %th
+                = f.title
+  .Approve
+    .Approve__Unapproved
+      .Approve__Unapproved__Title
+        承認待ち
+        %table{border: 1, width: "100%"} 
+          .Approve__Unapproved__Title__column
+            %tr 
+              %th{width: "200"} 
+                Title
+              %th
+                Detail
+              %th
+                edit
+              %th
+                delete
+          - @approve_unapproved.each do |f|
+            %tr 
+              %th
+                = f.title
+              %th
+                = f.title
+    .Approve__Approved
+      .Approve__Approved__Title
+        承認済
+        %table{border: 1, width: "100%"} 
+          .Request__Unapproved__Title__column
+            %tr 
+              %th{width: "200"} 
+                Title
+              %th
+                Detail
+          - @approve_approved.each do |f|
             %tr 
               %th
                 = f.title
