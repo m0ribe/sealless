@@ -35,10 +35,20 @@ class RequestsController < ApplicationController
 
 
 def edit
+  @request = Request.find(params[:id])
+  @request.admission = Request.find(params[:id]).admission
+  @request.pass = Request.find(params[:id]).pass
 end
 
 def destroy
-  redirect_to root_url
+  request = Request.find(params[:id])
+  if request.destroy
+    flash[:notice] = "削除が完了しました。"
+    redirect_to root_url
+  else
+    flash[:alert] = "削除できませんでした。"
+    redirect_to root_url
+  end
 end
 
 
