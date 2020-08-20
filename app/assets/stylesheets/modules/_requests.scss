@@ -75,6 +75,24 @@
       border: 1px solid black;
     }
   }
+  .Approve{
+    display: none;
+    display: flex;
+    height: 500px;
+    justify-content: space-around;
+    &__Unapproved{
+      width: 45%;
+      border: 1px solid black;
+    }
+    &__Approved{
+      width: 45%;
+      border: 1px solid black;
+    }
+  }
+  .Active{
+    color: white;
+    background-color: gray;
+  }
 }
 .Footer{
   background-color: gray;
