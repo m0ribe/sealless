@@ -18,10 +18,10 @@
                 Title
               %th
                 Detail 
-              %th
-                edit
-              %th
-                delete
+              %th{width: "40"} 
+                編集
+              %th{width: "40"} 
+                削除
           - @request_unapproved.each do |f|
             %tr 
               %th
@@ -31,9 +31,9 @@
               %th
                 = link_to edit_request_path(f.id) do
                   = icon('fa', 'cog', class: "Header__Box__icon")
-              %th
+              %th{ align: "center" }
                 = link_to request_path(f.id), method: :delete do
-                  = icon('fa', 'door-open', class: "Header__Box__icon")
+                  = icon('fa', 'trash', class: "Header__Box__icon")
     .Request__Approved
       .Request__Approved__Title
         承認済
@@ -61,16 +61,21 @@
                 Title
               %th
                 Detail
-              %th
-                edit
-              %th
-                delete
+              %th{width: "40"} 
+                依頼者
+              %th{width: "40"} 
+                詳細
           - @approve_unapproved.each do |f|
             %tr 
               %th
                 = f.title
               %th
                 = f.title
+              %th
+                = f.user.name
+              %th
+                = link_to edit_request_path(f.id) do
+                  = icon('fa', 'cog', class: "Header__Box__icon")
     .Approve__Approved
       .Approve__Approved__Title
         承認済

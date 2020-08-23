@@ -34,12 +34,48 @@ class RequestsController < ApplicationController
   end
 
 
-def edit
-end
+  def edit
+    @request = Request.find(params[:id])
+    @request.admission = Request.find(params[:id]).admission
+    @request.pass = Request.find(params[:id]).pass
+  end
 
-def destroy
-  redirect_to root_url
-end
+  def update
+    @request = Request.find(params[:id])
+    if @request.update(request_params)
+      redirect_to root_path
+    else
+      @request.admission = Request.find(params[:id]).admission
+      @request.pass = Request.find(params[:id]).pass
+      render "edit"
+    end
+  end
+
+  def destroy
+    request = Request.find(params[:id])
+    if request.destroy
+      flash[:notice] = "削除が完了しました。"
+      redirect_to root_url
+    else
+      flash[:alert] = "削除できませんでした。"
+      redirect_to root_url
+    end
+  end
+
+  def approve
+    @pass = Pass.where(request_id: params[:id])
+    if current_user.id == @pass.pluck(:first_user_id)[0]
+      Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:second_user_id))[0]
+    elsif current_user.id == @pass.pluck(:second_user_id)[0]
+      Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:third_user_id)[0])
+      binding.pry
+    elsif current_user.id == @pass.pluck(:third_user_id)[0]
+      Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:final_user_id)[0])
+    elsif current_user.id == @pass.pluck(:final_user_id)[0]
+      Request.find(params[:id]).update(status: "2")
+    end
+    redirect_to root_path
+  end
 
 
   private
@@ -52,28 +88,28 @@ end
                                     :deadline,
                                     :status,
                                     admission_attributes: [:user_id,
-                                                           :request_id,
-                                                           :title,
-                                                           :start,
-                                                           :finish,
-                                                           :detail,
-                                                           :prace,
-                                                           :campany,
-                                                           :representative,
-                                                           :tell,
-                                                           :worker1,
-                                                           :worker2,
-                                                           :worker3,
-                                                           :worker4,
-                                                           :aerial,
-                                                           :firearm,
-                                                           :notice],
+                                                            :request_id,
+                                                            :title,
+                                                            :start,
+                                                            :finish,
+                                                            :detail,
+                                                            :prace,
+                                                            :aerial,
+                                                            :firearm,
+                                                            :campany,
+                                                            :representative,
+                                                            :tell,
+                                                            :worker1,
+                                                            :worker2,
+                                                            :worker3,
+                                                            :worker4,
+                                                            :notice],
                                     pass_attributes: [:request_id,
                                                       :first_user_id,
                                                       :second_user_id,
                                                       :third_user_id,
                                                       :final_user_id,
                                                       :requested_user])
-                             .merge(user_id: current_user.id)
+                              .merge(user_id: current_user.id)
   end
 end
