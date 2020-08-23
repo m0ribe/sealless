@@ -12,7 +12,7 @@
     .Base__Pass
       .Base__Pass__Subtitle
         承認者一覧
-      = form.fields_for :pass, @pass do |user|
+      = form.fields_for :pass, @request.pass do |user|
         .Base__Pass__pulldown
           .Base__Pass__pulldown__first_user
             第1承認者 ：
@@ -31,7 +31,7 @@
       入場許可
     .Type__Approval
       書類承認
-  = form.fields_for :admission, @request.build_admission do |i|
+  = form.fields_for :admission, @request.admission do |i|
     .Form__Adomission
       .Form__Adomission__Child
         .Form__Adomission__Child__Subtitle
@@ -62,4 +62,9 @@
         = i.text_field :worker3, placeholder: "作業者3", class: "Form__Adomission__Child__Text-field"
         = i.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
         = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
-  = form.submit value: "SEND", class: "Form__Send"
+  - if @request.user_id == current_user.id
+    = form.submit value: "SEND", class: "Form__Send"
+  - else
+    .Btn_box
+      = link_to approve_request_path(params[:id]) do
+        承認        

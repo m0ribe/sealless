@@ -1,3 +1,3 @@
 class Admission < ApplicationRecord
-  belongs_to :request, optional: true
+  belongs_to :request
 end
