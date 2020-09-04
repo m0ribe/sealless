@@ -93,6 +93,23 @@
     }
   }
 }
+.Comment{
+  margin: 15px 30px;
+  border-top: 1px solid black;
+  &__Title{
+    margin: 10px 0;
+  }
+  &__Box{
+    &__Content{
+      margin: 5px 10px;
+      display: flex;
+      border-bottom: 1px solid lightgray;
+      &--Name{
+        width: 5%;
+      }
+    }
+  }
+}
 .Form__Send{
   display: block;
   margin: 5px auto;

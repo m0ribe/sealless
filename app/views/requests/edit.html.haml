@@ -63,8 +63,21 @@
         = i.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
         = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
   - if @request.user_id == current_user.id
-    = form.submit value: "SEND", class: "Form__Send"
+    = form.submit value: "変更", class: "Form__Send"
   - else
     .Btn_box
       = link_to approve_request_path(params[:id]) do
-        承認        
+        承認
+  .Comment
+    .Comment__Title
+      コメント
+    .Comment__Box  
+      - @request.comments.each do |c|
+        .Comment__Box__Content
+          .Comment__Box__Content--Name
+            = c.user.name
+          .Comment__Box__Content--Content
+            = c.content
+    = form_with(model: [@request, @comment], local: true) do |text|
+      = text.text_area :content
+      = text.submit "Send"

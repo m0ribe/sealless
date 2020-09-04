@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  before_action :sign_in
 
   def index
     request = Request.where(user_id: current_user.id)
@@ -8,7 +9,6 @@ class RequestsController < ApplicationController
     approve = Request.where(id: requested_id)
     @approve_unapproved = approve.where(status: 1)
     @approve_approved = approve.where(status: 2)
-
   end
 
   def new
@@ -38,17 +38,21 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
     @request.admission = Request.find(params[:id]).admission
     @request.pass = Request.find(params[:id]).pass
+    @request.comments = Request.find(params[:id]).comments
+    @comment  = @request.comments.build(user_id: current_user.id)
+    # @request.comments.new
   end
 
   def update
     @request = Request.find(params[:id])
-    if @request.update(request_params)
-      redirect_to root_path
-    else
-      @request.admission = Request.find(params[:id]).admission
-      @request.pass = Request.find(params[:id]).pass
-      render "edit"
-    end
+    @request.update(request_params)
+    binding.pry
+    redirect_to root_path
+    # else
+    #   @request.admission = Request.find(params[:id]).admission
+    #   @request.pass = Request.find(params[:id]).pass
+    #   render "edit"
+    # end
   end
 
   def destroy
@@ -65,10 +69,9 @@ class RequestsController < ApplicationController
   def approve
     @pass = Pass.where(request_id: params[:id])
     if current_user.id == @pass.pluck(:first_user_id)[0]
-      Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:second_user_id))[0]
+      Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:second_user_id)[0])
     elsif current_user.id == @pass.pluck(:second_user_id)[0]
       Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:third_user_id)[0])
-      binding.pry
     elsif current_user.id == @pass.pluck(:third_user_id)[0]
       Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:final_user_id)[0])
     elsif current_user.id == @pass.pluck(:final_user_id)[0]
@@ -76,7 +79,6 @@ class RequestsController < ApplicationController
     end
     redirect_to root_path
   end
-
 
   private
   def request_params
@@ -87,7 +89,8 @@ class RequestsController < ApplicationController
                                     :kind,
                                     :deadline,
                                     :status,
-                                    admission_attributes: [:user_id,
+                                    admission_attributes: [:id,
+                                                            :user_id,
                                                             :request_id,
                                                             :title,
                                                             :start,
@@ -104,12 +107,22 @@ class RequestsController < ApplicationController
                                                             :worker3,
                                                             :worker4,
                                                             :notice],
-                                    pass_attributes: [:request_id,
+                                    pass_attributes: [:id,
+                                                      :request_id,
                                                       :first_user_id,
                                                       :second_user_id,
                                                       :third_user_id,
                                                       :final_user_id,
-                                                      :requested_user])
+                                                      :requested_user],
+                                    comments_attributes: [:id,
+                                                          :request_id,
+                                                          :content])
                               .merge(user_id: current_user.id)
+  end
+
+  def sign_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 end

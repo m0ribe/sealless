@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_094237) do
+ActiveRecord::Schema.define(version: 2020_08_26_082032) do
 
   create_table "admissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "request_id"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2020_06_23_094237) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["request_id"], name: "index_admissions_on_request_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "request_id"
+    t.bigint "user_id"
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_id"], name: "index_comments_on_request_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "passes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -77,6 +87,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_094237) do
   end
 
   add_foreign_key "admissions", "requests"
+  add_foreign_key "comments", "requests"
+  add_foreign_key "comments", "users"
   add_foreign_key "passes", "requests"
   add_foreign_key "passes", "users", column: "final_user_id"
   add_foreign_key "passes", "users", column: "first_user_id"

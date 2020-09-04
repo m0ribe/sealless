@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   
   has_many :requests
-  has_many :pass
+  has_many :passes
+  has_many :comments
 
   validates :name, presence: true, uniqueness: true
   

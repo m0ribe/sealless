@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     member do
       get :approve
     end
+    resources :comments, only: [:create]
   end
 end
