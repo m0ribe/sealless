@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :requests, only: [:index, :new, :create, :edit, :update, :destroy] do
     member do
       get :approve
-      get :unapprove
     end
   end
 end
