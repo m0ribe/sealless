@@ -62,9 +62,15 @@
         = i.text_field :worker3, placeholder: "作業者3", class: "Form__Adomission__Child__Text-field"
         = i.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
         = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
-  - if @request.user_id == current_user.id
-    = form.submit value: "SEND", class: "Form__Send"
+  - if (@request.user_id == current_user.id)&&(@request.status == 1)
+    = form.submit value: "登録", class: "Form__Send"
+  - elsif (@request.user_id == current_user.id)&&(@request.status == 3)
+    = form.submit value: "再登録", class: "Form__Send"
+  - elsif @request.status == 2
   - else
     .Btn_box
       = link_to approve_request_path(params[:id]) do
         承認        
+    .Btn_box
+      = link_to unapprove_request_path(params[:id]) do
+        否認
