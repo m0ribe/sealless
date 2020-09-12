@@ -55,6 +55,16 @@
     border: 1px solid black;
   }
 }
+.Btn_box{
+  display: flex;
+  justify-content: center;
+  &__Btn{
+    margin: 15px 15px;
+    padding: 4px;
+    text-decoration: none;
+    border: 1px solid black;
+  }
+}
 
 .Form__Adomission{
   margin: 0 30px;

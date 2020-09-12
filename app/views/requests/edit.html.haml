@@ -69,8 +69,9 @@
   - elsif @request.status == 2
   - else
     .Btn_box
-      = link_to approve_request_path(params[:id]) do
-        承認        
-    .Btn_box
-      = link_to unapprove_request_path(params[:id]) do
-        否認
+      .Btn_box__Btn
+        = link_to approve_request_path(params[:id]) do
+          承認        
+      .Btn_box__Btn
+        = link_to unapprove_request_path(params[:id]) do
+          否認

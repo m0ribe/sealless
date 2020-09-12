@@ -59,7 +59,7 @@
                 タイトル
               %th
                 詳細
-              %th
+              %th{width: "40"} 
                 確認
           - @request_approved.each do |f|
             %tr 
@@ -106,10 +106,15 @@
                 タイトル
               %th
                 詳細
+              %th{width: "40"} 
+                確認
           - @approve_approved.each do |f|
             %tr 
               %th
                 = f.title
               %th
                 = f.title
+              %th
+                = link_to edit_request_path(f.id) do
+                  = icon('fa', 'cog', class: "Header__Box__icon")
 .Footer
