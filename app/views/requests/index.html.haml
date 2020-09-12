@@ -3,10 +3,10 @@
 .Body
   .Switch
     %button{ class: "Switch__Request Active", id: "Request" }
-      Request
+      起案
     %button{ class: "Switch__Approve", id: "Approve" }
-      Approve
-  = link_to "New request", new_request_path, class: "New-request"
+      承認
+  = link_to "新規作成", new_request_path, class: "New-request"
   .Request
     .Request__Unapproved
       .Request__Unapproved__Title
@@ -14,14 +14,29 @@
         %table{border: 1, width: "100%"} 
           .Request__Unapproved__Title__column
             %tr 
-              %th{width: "200"} 
-                Title
+              %th{width: "200"}
+                %span{class: "Request__Unapproved__Title__Deniel"}否認済
+                , 承認待タイトル
               %th
-                Detail 
+                詳細
               %th{width: "40"} 
                 編集
               %th{width: "40"} 
                 削除
+          - @request_deniel.each do |f|
+            %tr 
+              %th
+                .Request__Unapproved__Title__Deniel
+                  = f.title
+              %th
+                .Request__Unapproved__Title__Deniel
+                  = f.title
+              %th
+                = link_to edit_request_path(f.id) do
+                  = icon('fa', 'cog', class: "Header__Box__icon")
+              %th{ align: "center" }
+                = link_to request_path(f.id), method: :delete do
+                  = icon('fa', 'trash', class: "Header__Box__icon")
           - @request_unapproved.each do |f|
             %tr 
               %th
@@ -41,15 +56,20 @@
           .Request__Unapproved__Title__column
             %tr 
               %th{width: "200"} 
-                Title
+                タイトル
               %th
-                Detail 
+                詳細
+              %th
+                確認
           - @request_approved.each do |f|
             %tr 
               %th
                 = f.title
               %th
                 = f.title
+              %th
+                = link_to edit_request_path(f.id) do
+                  = icon('fa', 'cog', class: "Header__Box__icon")
   .Approve
     .Approve__Unapproved
       .Approve__Unapproved__Title
@@ -58,10 +78,10 @@
           .Approve__Unapproved__Title__column
             %tr 
               %th{width: "200"} 
-                Title
+                タイトル
               %th
-                Detail
-              %th{width: "40"} 
+                詳細
+              %th{width: "50"} 
                 依頼者
               %th{width: "40"} 
                 詳細
@@ -83,9 +103,9 @@
           .Request__Unapproved__Title__column
             %tr 
               %th{width: "200"} 
-                Title
+                タイトル
               %th
-                Detail
+                詳細
           - @approve_approved.each do |f|
             %tr 
               %th

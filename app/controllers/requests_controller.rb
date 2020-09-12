@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
     request = Request.where(user_id: current_user.id)
     @request_unapproved = request.where(status: 1)
     @request_approved = request.where(status: 2)
+    @request_deniel = request.where(status: 3)
     requested_id = Pass.where(requested_user: current_user.id).select(:request_id)
     approve = Request.where(id: requested_id)
     @approve_unapproved = approve.where(status: 1)
@@ -43,6 +44,7 @@ class RequestsController < ApplicationController
   def update
     @request = Request.find(params[:id])
     if @request.update(request_params)
+      @request.update(status: "1")
       redirect_to root_path
     else
       @request.admission = Request.find(params[:id]).admission
@@ -74,6 +76,12 @@ class RequestsController < ApplicationController
     elsif current_user.id == @pass.pluck(:final_user_id)[0]
       Request.find(params[:id]).update(status: "2")
     end
+    redirect_to root_path
+  end
+
+  def unapprove
+    @pass = Pass.where(request_id: params[:id])
+    Request.find(params[:id]).update(status: "3")
     redirect_to root_path
   end
 
