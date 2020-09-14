@@ -39,14 +39,12 @@ class RequestsController < ApplicationController
     @request.admission = Request.find(params[:id]).admission
     @request.pass = Request.find(params[:id]).pass
     @request.comments = Request.find(params[:id]).comments
-    @comment  = @request.comments.build(user_id: current_user.id)
-    # @request.comments.new
+    @comment = Comment.new
   end
 
   def update
     @request = Request.find(params[:id])
     @request.update(request_params)
-    binding.pry
     redirect_to root_path
     # else
     #   @request.admission = Request.find(params[:id]).admission

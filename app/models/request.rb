@@ -5,5 +5,4 @@ class Request < ApplicationRecord
   has_many :comments, dependent: :destroy
   accepts_nested_attributes_for :admission, allow_destroy: true
   accepts_nested_attributes_for :pass, allow_destroy: true
-  accepts_nested_attributes_for :comments, allow_destroy: true
 end
