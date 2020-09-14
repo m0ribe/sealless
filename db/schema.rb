@@ -14,10 +14,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_094237) do
 
   create_table "admissions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "request_id"
-    t.string "title", null: false
     t.datetime "start", null: false
     t.datetime "finish", null: false
-    t.string "detail", null: false
     t.string "prace", null: false
     t.string "campany", null: false
     t.string "representative", null: false
