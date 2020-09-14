@@ -36,14 +36,12 @@
       .Form__Adomission__Child
         .Form__Adomission__Child__Subtitle
           作業情報
-        = i.text_field :title, placeholder: "作業名", class: "Form__Adomission__Child__Text-field"
         .Form__Adomission__Child__Datetime-Start
           作業開始日時:
           = i.datetime_select :start, {}, class: "Form__Adomission__Child__Datetime-Start__Pulldown"
         .Form__Adomission__Child__Datetime-Finish
           作業終了日時:
           = i.datetime_select :finish, {}, class: 'Form__Adomission__Child__Datetime-Finish__Pulldown'
-        = i.text_area :detail, placeholder: "作業内容", class: "Form__Adomission__Child__Text-area"
         = i.text_field :prace, placeholder: "場所", class: "Form__Adomission__Child__Text-field"
         .Form__Adomission__Child__Check-box
           高所作業：
@@ -51,6 +49,8 @@
         .Form__Adomission__Child__Check-box
           火器使用：
           = i.check_box :firearm, class: "Form__Adomission__Child__Check-box__Firearm"    
+        .Form__Adomission__Child__Check-box
+          = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
       .Form__Adomission__Child
         .Form__Adomission__Child__Subtitle
           作業者情報
@@ -61,5 +61,4 @@
         = i.text_field :worker2, placeholder: "作業者2", class: "Form__Adomission__Child__Text-field"
         = i.text_field :worker3, placeholder: "作業者3", class: "Form__Adomission__Child__Text-field"
         = i.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
-        = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
   = form.submit value: "SEND", class: "Form__Send"
