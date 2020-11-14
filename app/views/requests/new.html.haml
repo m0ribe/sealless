@@ -1,3 +1,4 @@
+= javascript_include_tag 'new'
 = render "header"
 = form_with model: [@request], local: true do |form|
   .Base
@@ -27,38 +28,41 @@
             最終承認者：
             = user.collection_select :final_user_id, User.all, :id, :name, include_blank: true
   .Type
-    .Type__Admission
+    %button{type: "button", class: "Type__Admission Active", id: "Admission" }
       入場許可
-    .Type__Approval
+    %button{type: "button", class: "Type__Document", id: "Document" }
       書類承認
-  = form.fields_for :admission, @request.build_admission do |i|
-    .Form__Adomission
-      .Form__Adomission__Child
-        .Form__Adomission__Child__Subtitle
-          作業情報
-        .Form__Adomission__Child__Datetime-Start
-          作業開始日時:
-          = i.datetime_select :start, {}, class: "Form__Adomission__Child__Datetime-Start__Pulldown"
-        .Form__Adomission__Child__Datetime-Finish
-          作業終了日時:
-          = i.datetime_select :finish, {}, class: 'Form__Adomission__Child__Datetime-Finish__Pulldown'
-        = i.text_field :prace, placeholder: "場所", class: "Form__Adomission__Child__Text-field"
-        .Form__Adomission__Child__Check-box
-          高所作業：
-          = i.check_box :aerial, class: "Form__Adomission__Child__Check-box__Aerial"
-        .Form__Adomission__Child__Check-box
-          火器使用：
-          = i.check_box :firearm, class: "Form__Adomission__Child__Check-box__Firearm"    
-        .Form__Adomission__Child__Check-box
-          = i.text_area :notice, placeholder: "特記事項", class: "Form__Adomission__Child__Text-area"
-      .Form__Adomission__Child
-        .Form__Adomission__Child__Subtitle
-          作業者情報
-        = i.text_field :campany, placeholder: "会社名", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :representative, placeholder: "代表者名", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :tell, placeholder: "000-0000-0000", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :worker1, placeholder: "作業者1", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :worker2, placeholder: "作業者2", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :worker3, placeholder: "作業者3", class: "Form__Adomission__Child__Text-field"
-        = i.text_field :worker4, placeholder: "作業者4", class: "Form__Adomission__Child__Text-field"
+  .Form
+    .Form__Admission
+      = form.fields_for :admission, @request.build_admission do |i|
+        .Form__Admission__Child
+          .Form__Admission__Child__Subtitle
+            作業情報
+          .Form__Admission__Child__Datetime-Start
+            作業開始日時:
+            = i.datetime_select :start, {}, class: "Form__Admission__Child__Datetime-Start__Pulldown"
+          .Form__Admission__Child__Datetime-Finish
+            作業終了日時:
+            = i.datetime_select :finish, {}, class: 'Form__Admission__Child__Datetime-Finish__Pulldown'
+          = i.text_field :prace, placeholder: "場所", class: "Form__Admission__Child__Text-field"
+          .Form__Admission__Child__Check-box
+            高所作業：
+            = i.check_box :aerial, class: "Form__Admission__Child__Check-box__Aerial"
+          .Form__Admission__Child__Check-box
+            火器使用：
+            = i.check_box :firearm, class: "Form__Admission__Child__Check-box__Firearm"
+          .Form__Admission__Child__Check-box
+            = i.text_area :notice, placeholder: "特記事項", class: "Form__Admission__Child__Text-area"
+        .Form__Admission__Child
+          .Form__Admission__Child__Subtitle
+            作業者情報
+          = i.text_field :campany, placeholder: "会社名", class: "Form__Admission__Child__Text-field"
+          = i.text_field :representative, placeholder: "代表者名", class: "Form__Admission__Child__Text-field"
+          = i.text_field :tell, placeholder: "000-0000-0000", class: "Form__Admission__Child__Text-field"
+          = i.text_field :worker1, placeholder: "作業者1", class: "Form__Admission__Child__Text-field"
+          = i.text_field :worker2, placeholder: "作業者2", class: "Form__Admission__Child__Text-field"
+          = i.text_field :worker3, placeholder: "作業者3", class: "Form__Admission__Child__Text-field"
+          = i.text_field :worker4, placeholder: "作業者4", class: "Form__Admission__Child__Text-field"
+    .Form__Document
+      = form.file_field :pdf
   = form.submit value: "SEND", class: "Form__Send"
