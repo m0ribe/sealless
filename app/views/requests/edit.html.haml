@@ -64,9 +64,14 @@
           = i.text_field :worker3, placeholder: "作業者3", class: "Form__Admission__Child__Text-field"
           = i.text_field :worker4, placeholder: "作業者4", class: "Form__Admission__Child__Text-field"
     .Form__Document
-      = image_tag @request.pdf.url, width: "112", height: "112", alt: "preview"
+      - if @request.pdf.present?
+        = image_tag @request.pdf.url, alt: "preview"
+      %object{data: "@request.pdf.url", type: "application/pdf", height: "100%", width: "100%"}
+      -# PDF実装用コメントアウト
+      -# %embed{src: "@request.pdf.url", type: "application/pdf", height: "100%", width: "100%"}
+      -# %iframe{src: "@request.pdf.url", type: "application/pdf", height: "100%", width: "100%"}
       %label{for: "pdf", class: "Form__Document--btn", id: "label-btn"}
-        %pre.label-box__text-visible 画像を変更
+        %pre.label-box__text-visible クリックして画像を変更
         = form.file_field :pdf, id: "pdf", class: "Hide-field"
   - if (@request.user_id == current_user.id)&&(@request.status == 1)
     = form.submit value: "登録", class: "Form__Send"
