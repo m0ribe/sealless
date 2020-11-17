@@ -37,6 +37,9 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'carrierwave'
+  gem 'mini_magick'
+  gem 'rmagick'
 end
 
 group :development do

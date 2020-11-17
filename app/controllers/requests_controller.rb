@@ -27,7 +27,7 @@ class RequestsController < ApplicationController
     elsif @request.pass.third_user_id.present?
       @request.pass.requested_user = @request.pass.third_user_id
     elsif @request.pass.final_user_id.present?
-      @request.pass.requested_user = @request.pass.first_user_id
+      @request.pass.requested_user = @request.pass.final_user_id
     end
     if @request.save
        redirect_to requests_path

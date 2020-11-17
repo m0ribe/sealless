@@ -26,11 +26,9 @@
           - @request_deniel.each do |f|
             %tr 
               %th
-                .Request__Unapproved__Title__Deniel
-                  = f.title
+                = f.title.truncate(16)
               %th
-                .Request__Unapproved__Title__Deniel
-                  = f.title
+                = f.message.truncate(8)
               %th
                 = link_to edit_request_path(f.id) do
                   = icon('fa', 'cog', class: "Header__Box__icon")
@@ -40,9 +38,9 @@
           - @request_unapproved.each do |f|
             %tr 
               %th
-                = f.title
+                = f.title.truncate(16)
               %th
-                = f.title
+                = f.message.truncate(8)
               %th
                 = link_to edit_request_path(f.id) do
                   = icon('fa', 'cog', class: "Header__Box__icon")
@@ -64,9 +62,9 @@
           - @request_approved.each do |f|
             %tr 
               %th
-                = f.title
+                = f.title.truncate(16)
               %th
-                = f.title
+                = f.message.truncate(8)
               %th
                 = link_to edit_request_path(f.id) do
                   = icon('fa', 'cog', class: "Header__Box__icon")
@@ -88,9 +86,9 @@
           - @approve_unapproved.each do |f|
             %tr 
               %th
-                = f.title
+                = f.title.truncate(16)
               %th
-                = f.title
+                = f.message.truncate(8)
               %th
                 = f.user.name
               %th
@@ -111,9 +109,9 @@
           - @approve_approved.each do |f|
             %tr 
               %th
-                = f.title
+                = f.title.truncate(16)
               %th
-                = f.title
+                = f.message.truncate(8)
               %th
                 = link_to edit_request_path(f.id) do
                   = icon('fa', 'cog', class: "Header__Box__icon")

@@ -50,7 +50,7 @@
     width: 50%;
     border: 1px solid black;
   }
-  &__Approval{
+  &__Document{
     width: 50%;
     border: 1px solid black;
   }
@@ -66,7 +66,7 @@
   }
 }
 
-.Form__Adomission{
+.Form__Admission{
   margin: 0 30px;
   background-color: lightness($color: #111111);
   display: flex;
@@ -103,6 +103,18 @@
     }
   }
 }
+.Form__Document{
+  margin: 5px auto;
+  width: fit-content;
+  text-align: center;
+}
+.Change-btn{
+  border: 1px;
+}
+.Hide-field{
+  display: none;
+}
+
 .Form__Send{
   display: block;
   margin: 5px auto;
