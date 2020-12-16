@@ -7,6 +7,12 @@
   &__Textbox{
     width: 70%;
     margin: 10px 30px 0 30px;
+    &__Required{
+      display: flex;
+      &__Asterisk{
+        color: red;
+      }
+    }
     &__Subtitle{
       margin: 10px 0 0 0;
       font-size: 30px;
@@ -39,7 +45,16 @@
     &__Subtitle{
     margin: 10px 0 0 0;
     font-size: 30px;
-   }
+    }
+    &__pulldown__final_user__Required{
+    display: flex;
+      &--margin{
+        margin: 0 5px 0 0;
+      }
+      &__Asterisk{
+      color: red;
+      }
+    }
   }
 }
 

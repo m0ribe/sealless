@@ -5,8 +5,14 @@
     .Base__Textbox
       .Base__Textbox__Subtitle
         基本情報
-      = form.text_field :title, placeholder: "タイトル", class: "Base__Textbox__Text-field"
-      = form.text_area :message, placeholder: "内容", class: "Base__Textbox__Text-area"
+      .Base__Textbox__Required
+        = form.text_field :title, placeholder: "タイトル", class: "Base__Textbox__Text-field"
+        .Base__Textbox__Required__Asterisk
+          *(必須項目)
+      .Base__Textbox__Required
+        = form.text_area :message, placeholder: "内容", class: "Base__Textbox__Text-area"
+        .Base__Textbox__Required__Asterisk
+          *
       .Base__Textbox__Deadline
         希望納期:
         = form.datetime_select :deadline, {}, class: "Base__Textbox__Deadline__Pulldown"
@@ -24,9 +30,12 @@
           .Base__Pass__pulldown__third_user
             第3承認者 ：
             = user.collection_select :third_user_id, User.all, :id, :name, include_blank: true
-          .Base__Pass__pulldown__final_user
-            最終承認者：
+          .Base__Pass__pulldown__final_user__Required
+            .Base__Pass__pulldown__final_user__Required--margin
+              最終承認者： 
             = user.collection_select :final_user_id, User.all, :id, :name, include_blank: true
+            .Base__Pass__pulldown__final_user__Required__Asterisk
+              *
   .Type
     %button{type: "button", class: "Type__Admission Active", id: "Admission" }
       入場許可
