@@ -6,4 +6,6 @@ class Request < ApplicationRecord
   accepts_nested_attributes_for :pass, allow_destroy: true
 
   mount_uploader :pdf, ImageUploader
+  validates :title, presence: true
+  validates :message, presence: true
 end
