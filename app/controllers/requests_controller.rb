@@ -32,7 +32,7 @@ class RequestsController < ApplicationController
     if @request.save
        redirect_to requests_path
     else
-      flash.now[:danger] = '必須事項を入力してください'
+      flash.now[:alert] = '必須事項を入力してください'
       render :new
     end
   end
@@ -52,7 +52,7 @@ class RequestsController < ApplicationController
     else
       @request.admission = Request.find(params[:id]).admission
       @request.pass = Request.find(params[:id]).pass
-      flash.now[:danger] = '必須事項を入力してください'
+      flash.now[:alert] = '必須事項を入力してください'
       render "edit"
     end
   end
