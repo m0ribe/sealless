@@ -83,6 +83,7 @@
       }
     }
     &__Approved{
+      overflow: scroll;
       width: 45%;
       border: 1px solid black;
       &__Title__column{
@@ -96,10 +97,12 @@
     height: 500px;
     justify-content: space-around;
     &__Unapproved{
+      overflow: scroll;
       width: 45%;
       border: 1px solid black;
     }
     &__Approved{
+      overflow: scroll;
       width: 45%;
       border: 1px solid black;
     }

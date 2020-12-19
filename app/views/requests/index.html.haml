@@ -26,7 +26,8 @@
           - @request_deniel.each do |f|
             %tr 
               %th
-                = f.title.truncate(16)
+                .Request__Unapproved__Title__Deniel
+                  = f.title.truncate(16)
               %th
                 = f.message.truncate(8)
               %th
