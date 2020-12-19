@@ -74,7 +74,6 @@ class RequestsController < ApplicationController
       Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:second_user_id))[0]
     elsif current_user.id == @pass.pluck(:second_user_id)[0]
       Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:third_user_id)[0])
-      binding.pry
     elsif current_user.id == @pass.pluck(:third_user_id)[0]
       Pass.where( request_id: params[:id] ).update( requested_user: @pass.pluck(:final_user_id)[0])
     elsif current_user.id == @pass.pluck(:final_user_id)[0]
